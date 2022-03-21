@@ -1,0 +1,29 @@
+Tenant Management Plan
+
+Panels: Super Admin, Admin, Tenant
+
+Functionalities : 
+
+    Super Admin :
+        Create, Check and Update Admin/ Landlord
+        Set Per unit electricity cost
+
+        
+    Admin: 
+        Create, Check and Update Tenant
+        Upload, Read and Update Tenant Documents( security amount)
+        Set Electricity Bill Option
+        Set Electricity BIll Commission
+        Include or Exclude water Bill
+        Set Water Charges
+        Set any other Charges with amount
+        Settle previous amount
+        Update paid amount, remaining can be settled in next bill
+        check previous bills
+        Generate Bill
+
+    Tenant: 
+        Check current and previous bills
+        Check settled and Pending amount
+        message for review
+        Update profile
