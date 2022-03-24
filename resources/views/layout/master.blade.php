@@ -6,9 +6,13 @@
     <body class="sb-nav-fixed">
         @include('layout.header')
         <div id="layoutSidenav">
-            
-                @include('layout.sidebar')
-            
+            @if(Auth::user()->type == 'Sa')
+                @include('layout.sa_sidebar')
+            @elseif(Auth::user()->type == 'Ad')
+                @include('layout.ad_sidebar')
+            @elseif(Auth::user()->type == 'Tn')
+                @include('layout.tn_sidebar')
+            @endif
             <div id="layoutSidenav_content">
                 <main>
                     @yield('content')

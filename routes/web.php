@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 
@@ -16,18 +17,34 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/login', function () {
-    
-    return view('login');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::middleware('auth')->group(function () {
+
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+// SuperAdmin Routes
+    Route::get('/Sa/dashboard', function () {
+        return view('superadmin.dashboard');
+    })->name('sa.dashboard');
+
+
+
+// Admin Routes
+    Route::get('/Ad/addtenant', function () {
+        return view('admin.addtenant');
+    })->name('ad.addtenant');
+
+    Route::get('/Ad/dashboard',[AdminController::class,'index'])->name('ad.dashboard');
+    Route::post('/Ad/addtenant',[AdminController::class,'addtnt'])->name('ad.addtnt');
+
+
+
+// Tenant Routes
+    Route::get('/Tn/dashboard', function () {
+        return view('tenant.dashboard');
+    })->name('tn.dashboard');
 });
-Route::get('/logout', function () {
-    Session::forget('user');
-    return redirect('login');
-});
-Route::post('/login',[UserController::class,'login']);
-
-
-Route::get('/',[ProductController::class,'index']);
-
-
-// Route::view('/','login');
+require __DIR__ . '/auth.php';
