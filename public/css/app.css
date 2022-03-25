@@ -192,7 +192,12 @@ button,
   /* background-color: transparent; 2 */
   /* background-image: none; 2 */
 }
-
+.header-username {
+  -webkit-appearance: button; 
+  background-color: transparent; 
+  background-image: none; 
+  color:#9ca3af;
+}
 /*
 Use the modern Firefox focus style for all focusable elements.
 */

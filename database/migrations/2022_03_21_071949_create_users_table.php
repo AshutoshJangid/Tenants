@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('password');
             $table->string('image');
+            $table->integer('parent_id');
             $table->string('type');
             $table->enum('status',['active', 'inactive'])->default('active');
             $table->timestamps();

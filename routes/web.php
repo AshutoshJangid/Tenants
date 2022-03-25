@@ -38,8 +38,13 @@ Route::middleware('auth')->group(function () {
     })->name('ad.addtenant');
 
     Route::get('/Ad/dashboard',[AdminController::class,'index'])->name('ad.dashboard');
-    Route::post('/Ad/addtenant',[AdminController::class,'addtnt'])->name('ad.addtnt');
-
+    // Add new Tenant
+    Route::view('/Ad/addtenant','admin.addtenant')->name('ad.addtenant');
+    Route::post('/Ad/addtnt',[AdminController::class,'addtnt'])->name('ad.addtnt');
+    // View Tenant List
+    Route::get('/Ad/view-tnt-list',[AdminController::class,'viewTntList'])->name('ad.viewTntList');
+    // Change user status
+    Route::get('/Ad/change-status/{id}',[AdminController::class,'changeStatus'])->name('ad.changeStatus');
 
 
 // Tenant Routes
