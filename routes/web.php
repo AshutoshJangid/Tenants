@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,22 +14,26 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('login');
+});
 Route::middleware('auth')->group(function () {
 
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-// SuperAdmin Routes
+
+
+
+////////////////////////////////// SuperAdmin Routes////////////////////////////////
     Route::get('/Sa/dashboard', function () {
         return view('superadmin.dashboard');
     })->name('sa.dashboard');
 
 
 
-// Admin Routes
+
+///////////////////////////// Admin Routes ////////////////////////////////////////
     Route::get('/Ad/addtenant', function () {
         return view('admin.addtenant');
     })->name('ad.addtenant');
@@ -45,9 +46,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/Ad/view-tnt-list',[AdminController::class,'viewTntList'])->name('ad.viewTntList');
     // Change user status
     Route::get('/Ad/change-status/{id}',[AdminController::class,'changeStatus'])->name('ad.changeStatus');
+    // Tenant Personal Detail Page View
+    Route::get('/Ad/tnt-details/{id}',[AdminController::class,'tntDetails'])->name('ad.tntDetails');
+    // Tenant Rental Detail Page View
+    Route::get('/Ad/tnt-rent-details/{id}',[AdminController::class,'tntRentDetails'])->name('ad.tntRentDetails');
+    // Tenant Rental Detail Update
+    Route::post('/Ad/add-tnt-details',[AdminController::class,'addtTntDetails'])->name('ad.addtntDetails');
+    // Tenant Personal Detail Update
+    Route::post('/Ad/update-tnt-details',[AdminController::class,'updatetTntDetails'])->name('ad.updateTntDetails');
+    // Tenant Detail Page View
+    Route::get('/Ad/tnt-view-details/{id}',[AdminController::class,'tntViewDetails'])->name('ad.tntViewDetails');
 
-
-// Tenant Routes
+//////////////////////////////// Tenant Routes ////////////////////////////////
     Route::get('/Tn/dashboard', function () {
         return view('tenant.dashboard');
     })->name('tn.dashboard');

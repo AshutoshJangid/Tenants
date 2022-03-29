@@ -192,6 +192,10 @@ button,
   /* background-color: transparent; 2 */
   /* background-image: none; 2 */
 }
+.user-detail-img{
+  max-width: 250px;
+    height: 250px
+}
 .header-username {
   -webkit-appearance: button; 
   background-color: transparent; 
@@ -376,6 +380,12 @@ video {
   max-width: 100%;
   height: auto;
 }
+
+.view-details p{
+  line-height: 25px;
+  font-weight: 500;
+}
+
 
 /*
 Ensure the default browser behavior of the `hidden` attribute.

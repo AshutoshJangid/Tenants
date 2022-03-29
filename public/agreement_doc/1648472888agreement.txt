@@ -1,0 +1,25 @@
+FTP Username	epiz_29555434
+FTP Password    4Mv3vsxNGgn
+FTP Hostname	ftpupload.net
+FTP Port (optional)	21
+
+
+======================================================
+SAG Server Cpanel
+WHM Login Detail:
+Url: https:///146.88.26.30:2087
+Username: root
+Password: Jsun@d8j1Kc#@uj14MSi1R
+New Password:Jim@18dj2L!dime91Leo
+
+======================================================
+seekcoin.io cpanel
+Hostinger.com
+user=  seekrewards@protonmail.com
+pass= Victorowen123
+
+=======================================================
+SAGBPM cpanel
+Url:https://198.211.55.134:2087/
+Username:root
+Password:VP&34dfrT%SA$XZ

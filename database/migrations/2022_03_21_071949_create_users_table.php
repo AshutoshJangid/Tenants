@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('password');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('aadhar_number')->unique();
+            $table->string('aadhar_image')->nullable();
             $table->integer('parent_id');
             $table->string('type');
             $table->enum('status',['active', 'inactive'])->default('active');

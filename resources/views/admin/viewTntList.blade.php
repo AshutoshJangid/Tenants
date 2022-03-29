@@ -21,18 +21,20 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Aadhar No</th>
                         <th>Status</th>
                         <th>Start date</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
+                        <th>Action</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Age</th>
+                        <th>Aadhar No</th>
+                        <th>Status</th>
                         <th>Start date</th>
-                        <th>Salary</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -43,11 +45,14 @@
                             <a href="{{route('ad.changeStatus',$users->id)}}" class="btn btn-warning">Deactive</a>
                             @else
                             <a href="{{route('ad.changeStatus',$users->id)}}" class="btn btn-success">Active</a>
-                        @endif
+                            @endif
+                            <a href="{{route('ad.tntDetails',$users->id)}}" class="btn btn-primary">Edit</a>
+                            <a href="{{route('ad.tntViewDetails',$users->id)}}" class="btn btn-info">View</a>
                         </td>
                         <td>{{$users->name}}</td>
                         <td>{{$users->email}}</td>
                         <td>{{$users->phone}}</td>
+                        <td>{{$users->aadhar_number}}</td>
                         <td> {{strtoupper($users->status)}} </td>
                         <td>{{date('d-M-Y', strtotime($users->created_at));}}</td>
                     </tr>
