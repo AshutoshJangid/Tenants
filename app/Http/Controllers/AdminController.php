@@ -101,6 +101,7 @@ class AdminController extends Controller
 
         
     }
+    
     public function viewTntList(Request $request){
         $user_id = $request->user()->id;
         $userdata = User::where('parent_id',$user_id)->get();

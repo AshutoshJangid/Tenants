@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/Ad/update-tnt-details',[AdminController::class,'updatetTntDetails'])->name('ad.updateTntDetails');
     // Tenant Detail Page View
     Route::get('/Ad/tnt-view-details/{id}',[AdminController::class,'tntViewDetails'])->name('ad.tntViewDetails');
+
+
+    // Tenant Bill Create Page View
+    Route::get('/Ad/select-user-bill',[BillController::class,'selectUserBill'])->name('ad.selectUserBill');
+    // Tenant Bill Create Form Page
+    Route::post('/Ad/tnt-bill-form',[BillController::class,'tntBillForm'])->name('ad.tntBillForm');
+    // Tenant Bill Create submit
+    Route::post('/Ad/tnt-bill-create',[BillController::class,'tntBillCreate'])->name('ad.tntBillCreate');
+    // Tenant Bill Create submit
+    Route::get('/Ad/download-pdf',[BillController::class,'downloadPdf'])->name('ad.downloadPdf');
+
 
 //////////////////////////////// Tenant Routes ////////////////////////////////
     Route::get('/Tn/dashboard', function () {
