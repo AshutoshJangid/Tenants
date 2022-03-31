@@ -48,6 +48,7 @@
                             @endif
                             <a href="{{route('ad.tntDetails',$users->id)}}" class="btn btn-primary">Edit</a>
                             <a href="{{route('ad.tntViewDetails',$users->id)}}" class="btn btn-info">View</a>
+                            <a href="{{route('ad.userBills',$users->id)}}" class="btn btn-dark">Bills</a>
                         </td>
                         <td>{{$users->name}}</td>
                         <td>{{$users->email}}</td>

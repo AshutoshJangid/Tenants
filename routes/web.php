@@ -66,7 +66,9 @@ Route::middleware('auth')->group(function () {
     // Tenant Bill Create submit
     Route::post('/Ad/tnt-bill-create',[BillController::class,'tntBillCreate'])->name('ad.tntBillCreate');
     // Tenant Bill Create submit
-    Route::get('/Ad/download-pdf',[BillController::class,'downloadPdf'])->name('ad.downloadPdf');
+    Route::get('/Ad/download-pdf/{bill_id}',[BillController::class,'downloadPdf'])->name('ad.downloadPdf');
+    // Tenant Bills List User Wise
+    Route::get('/Ad/user-bills/{tnt_id}',[BillController::class,'userBills'])->name('ad.userBills');
 
 
 //////////////////////////////// Tenant Routes ////////////////////////////////
