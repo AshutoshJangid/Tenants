@@ -14,10 +14,16 @@ class BillController extends Controller
     
     public function selectUserBill(Request $request){
         $user_id = $request->user()->id;
-        $tnts_data = User::select('id','name')->where('parent_id',$user_id)->where('status','active')->get();
-        // dd($tntdata);
+        $tnts_ids = User::select('id')->where('parent_id',$user_id)->where('status','active')->get();
+        foreach($tnts_ids as $tnt_id){
+            $date = Carbon::now();
+            $bill_id = $date->format('my').$tnt_id->id;
+            // $bill_id = '0322'.$tnt_id->id;
+            $bill_ids[] = $bill_id;
+        }
+        $tnts_data = User::select('id','name')->where('parent_id',$user_id)->whereNotIN('id',BillDetail::select('user_id')->whereIn('bill_id',$bill_ids)->pluck('user_id')->toArray())->get();
+        
         return  view('admin.selectUser', compact("tnts_data"));
-        // return redirect()->route('ad.tntDetails');
     }
     
     public function tntBillForm(Request $request){
