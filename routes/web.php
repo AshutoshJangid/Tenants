@@ -69,8 +69,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/Ad/download-pdf/{bill_id}',[BillController::class,'downloadPdf'])->name('ad.downloadPdf');
     // Tenant Bills List User Wise
     Route::get('/Ad/user-bills/{tnt_id}',[BillController::class,'userBills'])->name('ad.userBills');
-
-
+    // View Bill Setttlement Page
+    Route::get('/Ad/select-bill', function () { return view('admin.selectBill'); })->name('ad.selectBill');
+    // Bill Setttlement 
+    Route::post('/Ad/settle-amount',[BillController::class,'settleAmt'])->name('ad.settleAmt');
+    
+    Route::post('/Ad/get-bill-detail',[BillController::class,'getBillDetail'])->name('ad.getBillDetail');
 //////////////////////////////// Tenant Routes ////////////////////////////////
     Route::get('/Tn/dashboard', function () {
         return view('tenant.dashboard');

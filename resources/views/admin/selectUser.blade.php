@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <h2>Select User</h2>
             
-            <form action="{{route('ad.tntBillForm')}}" method="POST">
+            <form action="{{route('ad.settleAmt')}}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="slct-user">Select Tenant to Create Bill</label>

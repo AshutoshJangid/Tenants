@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\TenantDetail;
 use App\Models\BillDetail;
+use App\Models\BillSettle;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 class BillController extends Controller
@@ -99,9 +100,26 @@ class BillController extends Controller
             $oth_tot = $oth_tot+$value; 
             }
         }
+        $settle_prev=0;
         $subtotal = $bills->rent_amt+$bills->tot_elec_bill+$bills->water_bill+$oth_tot;
         $main_total = $subtotal - $discount;
-        $pdf = PDF::loadView('layout.m_pdf', compact("bill_data","tnts_data","user_data","bills","oth_char","subtotal","main_total","discount")); 
+        $select_settle  = BillSettle::where('bill_id',$bill_id)->orderBy('id', 'DESC')->get();
+        
+        if(empty($select_settle)||$select_settle==null||!$select_settle){
+            $settle_amt = new BillSettle;
+            $settle_amt->bill_id = $bill_id;
+            $settle_amt->total_amt = $main_total;
+            $settle_amt->remaining_amt	 = $main_total;
+            $settle_amt->save();
+        }
+        $prevdate = Carbon::now()->subMonth();
+        $prev_bill_id = $prevdate->format('my').$bill_data->user_id;
+        $settle_prev_data = BillSettle::where('bill_id',$prev_bill_id)->orderBy('id', 'DESC')->first();
+        if(!empty($settle_prev)){
+            $settle_prev=$settle_prev_data->remaining_amt;
+            $main_total=$main_total+$settle_prev;
+        }
+        $pdf = PDF::loadView('layout.m_pdf', compact("bill_data","tnts_data","user_data","bills","oth_char","subtotal","main_total","discount","settle_prev")); 
         return $pdf->download('invoice.pdf');
 
     }
@@ -116,4 +134,38 @@ class BillController extends Controller
         // return redirect()->route('ad.tntDetails');
     }
     
+    public function getBillDetail(Request $request){
+        $user_id = $request->user()->id;
+        $bill_id = $request->bill_id;
+        $settle_data = BillSettle::where('bill_id',$bill_id)->orderBy('id', 'DESC')->first();
+
+        // dd($tntdata);
+        return  view('admin.settleForm', compact("settle_data"));
+        // return redirect()->route('ad.tntDetails');
+    }
+    
+    public function settleAmt(Request $request){
+        $user_id = $request->user()->id;
+        $bill_id = $request->bill_id;
+        $received_amt = $request->bill_amt;
+
+        $settle_data = BillSettle::where('bill_id',$bill_id)->orderBy('id', 'DESC')->first();
+        $total_amt = $settle_data->total_amt;
+        // $received_amt = $settle_data->received_amt;
+        $remaining_amt = $settle_data->remaining_amt;
+        $tot_remaining = $remaining_amt - $received_amt;
+            $settle_amt = new BillSettle;
+            $settle_amt->bill_id = $bill_id;
+            $settle_amt->total_amt = $total_amt;
+            $settle_amt->received_amt = $received_amt;
+            $settle_amt->remaining_amt = $tot_remaining;
+            
+            if($settle_amt->save()){
+                
+            return  view('admin.selectBill');
+            }
+        // return redirect()->route('ad.tntDetails');
+    }
+
 }
+// Bill Settlement Module

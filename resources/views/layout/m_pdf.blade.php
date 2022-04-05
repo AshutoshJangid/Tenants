@@ -151,9 +151,9 @@
           {{$discount}}</td>
       </tr>
       <tr>
-        <td style="text-align: right;padding-right: 20px;">Tax</td>
+        <td style="text-align: right;padding-right: 20px;">Previous Amount Settle</td>
         <td style="background-color:#d4e0f9; text-align: center;border: 1px solid black;border-collapse: collapse;">
-          --</td>
+          {{$settle_prev}}</td>
       </tr>
       <tr>
         <td style="text-align: right;padding-right: 20px;"><strong>Total</strong></td>

@@ -53,7 +53,7 @@
                             @endif
                         </div> -->
                         <div class="col-sm-12 pt-3">
-                            <p> Rental Place Type: {{$tnt_rent_data->type=='other' || $tnt_rent_data->type=='other' ? 'Not Specified' : $tnt_rent_data->type}}</p>
+                            <p> Rental Place Type: {{$tnt_rent_data->type=='other' || $tnt_rent_data->type==null || !$tnt_rent_data->type ? 'Not Specified' : $tnt_rent_data->type}}</p>
                             <p> Joining Date: {{$tnt_rent_data->joining_date}}</p>
                             <p> Monthly Rent Amount: {{$tnt_rent_data->rent_amt}}</p>
                             <p> Advance Amount: {{$tnt_rent_data->advance_amt}}</p>
