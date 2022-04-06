@@ -103,6 +103,13 @@ class BillController extends Controller
         $settle_prev=0;
         $subtotal = $bills->rent_amt+$bills->tot_elec_bill+$bills->water_bill+$oth_tot;
         $main_total = $subtotal - $discount;
+        $prevdate = Carbon::now()->subMonth();
+        $prev_bill_id = $prevdate->format('my').$bill_data->user_id;
+        $settle_prev_data = BillSettle::where('bill_id',$prev_bill_id)->orderBy('id', 'DESC')->first();
+        if(!empty($settle_prev)){
+            $settle_prev=$settle_prev_data->remaining_amt;
+            $main_total=$main_total+$settle_prev;
+        }
         $select_settle  = BillSettle::where('bill_id',$bill_id)->orderBy('id', 'DESC')->get();
         
         if(empty($select_settle)||$select_settle==null||!$select_settle){
@@ -112,13 +119,7 @@ class BillController extends Controller
             $settle_amt->remaining_amt	 = $main_total;
             $settle_amt->save();
         }
-        $prevdate = Carbon::now()->subMonth();
-        $prev_bill_id = $prevdate->format('my').$bill_data->user_id;
-        $settle_prev_data = BillSettle::where('bill_id',$prev_bill_id)->orderBy('id', 'DESC')->first();
-        if(!empty($settle_prev)){
-            $settle_prev=$settle_prev_data->remaining_amt;
-            $main_total=$main_total+$settle_prev;
-        }
+        
         $pdf = PDF::loadView('layout.m_pdf', compact("bill_data","tnts_data","user_data","bills","oth_char","subtotal","main_total","discount","settle_prev")); 
         return $pdf->download('invoice.pdf');
 
