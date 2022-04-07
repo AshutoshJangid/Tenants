@@ -7,4 +7,8 @@ use Illuminate\Http\Request;
 class SuperAdminController extends Controller
 {
     //
+    public function index(Request $request)
+    {
+        return  view('superadmin.dashboard');
+    }
 }

@@ -3,7 +3,7 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Core</div>
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{route('ad.dashboard')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
@@ -30,7 +30,10 @@
                             {{-- <a class="nav-link" href="{{route('ad.viewTntList')}}">View Tenants</a> --}}
                         </nav>
                     </div>
-                    
+                    <a class="nav-link" href="{{route('ad.selectBill')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Settle Previous Bill
+                    </a>
                     
                 </div>
             </div>
@@ -40,6 +43,3 @@
             </div>
         </nav>
     </div>
-
-        
-    

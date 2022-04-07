@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\BillController;
 
 /*
@@ -26,15 +27,15 @@ Route::middleware('auth')->group(function () {
 
 
 
-////////////////////////////////// SuperAdmin Routes////////////////////////////////
+////////////////////////////////// SuperAdmin Routes//////////////////////////////////
     Route::get('/Sa/dashboard', function () {
         return view('superadmin.dashboard');
     })->name('sa.dashboard');
+    // Route::get('/Sa/dashboard',[SuperAdminController::class,'index'])->name('sa.dashboard');
 
 
 
-
-///////////////////////////// Admin Routes ////////////////////////////////////////
+////////////////////////////////// Admin Routes //////////////////////////////////
     Route::get('/Ad/addtenant', function () {
         return view('admin.addtenant');
     })->name('ad.addtenant');
@@ -75,7 +76,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/Ad/settle-amount',[BillController::class,'settleAmt'])->name('ad.settleAmt');
     
     Route::post('/Ad/get-bill-detail',[BillController::class,'getBillDetail'])->name('ad.getBillDetail');
-//////////////////////////////// Tenant Routes ////////////////////////////////
+
+
+
+
+
+////////////////////////////////////// Tenant Routes //////////////////////////////////////
     Route::get('/Tn/dashboard', function () {
         return view('tenant.dashboard');
     })->name('tn.dashboard');
