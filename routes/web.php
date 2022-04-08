@@ -33,14 +33,19 @@ Route::middleware('auth')->group(function () {
     })->name('sa.dashboard');
     // Route::get('/Sa/dashboard',[SuperAdminController::class,'index'])->name('sa.dashboard');
 
+    // Add new Admin
+    Route::view('/Sa/add-admin','superadmin.addAdmin')->name('sa.addAdmin');
+    Route::post('/Sa/new-admin',[SuperAdminController::class,'newAdmin'])->name('sa.newAdmin');
+    // View Tenant List
+    Route::get('/Sa/view-adm-list',[SuperAdminController::class,'viewAdmList'])->name('sa.viewAdmList');
+    // Change Admin status
+    Route::get('/Sa/change-status/{id}',[SuperAdminController::class,'changeStatus'])->name('sa.changeStatus');
 
 
 ////////////////////////////////// Admin Routes //////////////////////////////////
-    Route::get('/Ad/addtenant', function () {
-        return view('admin.addtenant');
-    })->name('ad.addtenant');
+    
 
-    Route::get('/Ad/dashboard',[AdminController::class,'index'])->name('ad.dashboard');
+    Route::get('/Ad/dashboard',[AdminController::class,'index'])->name('ad.dashboard'); 
     // Add new Tenant
     Route::view('/Ad/addtenant','admin.addtenant')->name('ad.addtenant');
     Route::post('/Ad/addtnt',[AdminController::class,'addtnt'])->name('ad.addtnt');
